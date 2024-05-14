@@ -1,4 +1,4 @@
 i#!/usr/bin/env bash
 # Bash script that listens on port 98 on localhost.
 
-nc -l localhost 98
+nc -lk localhost 98
