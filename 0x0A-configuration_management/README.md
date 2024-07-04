@@ -1,0 +1,1 @@
+This is adirectory that contains example of puppet syntax on Configuration management
