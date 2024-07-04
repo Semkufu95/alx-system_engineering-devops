@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Transfers file from our client to the server
+
+scp 
