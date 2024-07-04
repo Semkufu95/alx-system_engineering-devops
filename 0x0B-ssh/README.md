@@ -1,0 +1,1 @@
+This directory contains ssh commands and project answers for alx task 0x0B-ssh
