@@ -1,0 +1,4 @@
+#!/usr/bin/bash env
+#A script to configure a user
+
+sudo -u "$" whoami
