@@ -1,0 +1,1 @@
+This directory has bash scripts to configure firewall in a remote server, The scripts are written accordingly to solving Alx tasks on firewall project
