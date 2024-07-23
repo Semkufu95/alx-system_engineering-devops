@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Install Ngnix to web server wb01
+
+sudo apt-get update -y
+sudo apt-get install nginx -y
+
+# Configuring Ngnix to listen to port 80
+sudo ufw allow 'Nginx HTTP'
+# Creating a simple html page with "Hello, world!" message
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
+
+# redirect
+sudo sed -i '/server_name _;/c server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com permanent;' /etc/nginx/sites-enabled/default
+
+# starting Nginx
+sudo service nginx restart
