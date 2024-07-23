@@ -1,0 +1,1 @@
+This is a directory containing codes and tasks done at alx on mysql
