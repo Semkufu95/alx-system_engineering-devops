@@ -2,15 +2,12 @@
 # Install Ngnix to web server wb01
 
 sudo apt-get update -y
-sudo apt-get -y install nginx
+sudo apt-get install nginx -y
 
 # Configuring Ngnix to listen to port 80
 sudo ufw allow 'Nginx HTTP'
-
 # Creating a simple html page with "Hello, world!" message
-sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
 
-# Check if installation is successful
-sudo nginx -t 
 # starting Nginx
 sudo service nginx restart
