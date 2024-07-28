@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Installing and configuring Load balancer
+
+sudo apt-get -y upgrade
+sudo apt-get -y install haproxy
+
+lb_config="\
+backend webservers
+	balance roundrobin
+	server 381076-web-01 54.197.94.140:80 check
+	server 381076-web-02 54.157.188.94:80 check
+
+frontend haproxy_balancer
+	 bind *:80
+	 mode http
+	 default_backend webservers
+"
+
+echo "$lb_config" | sudo tee -a /etc/haproxy/haprocy.cfg
+
+# Enable Haproxy to be started by init script
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Testing Haproxy configuration file
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Restart the haproxy service
+sudo service haproxy restart
