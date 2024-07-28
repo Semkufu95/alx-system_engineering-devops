@@ -15,7 +15,7 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y install haproxy
 
-echo "$lb_config" | sudo tee -a /etc/haproxy/haprocy.cfg
+echo "$lb_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
 # Enable Haproxy to be started by init script
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
