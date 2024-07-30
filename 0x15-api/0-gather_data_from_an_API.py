@@ -10,14 +10,15 @@ import sys
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
 
-    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
-    task = requests.get(url + "todos", data={"userId": (sys.argv[1])}).json()
-    complete = []
-    for t in task:
+    employee_id = sys.argv[1]
+    user = requests.get(url + "users/{}".format(employee_id)).json()
+    todos = requests.get(url + "todos", params={"userId": employee_id}).json()
+    completed = []
+    for t in todos:
         if t.get('completed') is True:
-            complete.append(t.get('title'))
+            completed.append(t.get('title'))
 
     print("Employee {} is done with tasks({}/{}):".format(
-        user.get("name"), len(complete), len(task)))
-    for c in complete:
+        user.get("name"), len(completed), len(todos)))
+    for c in completed:
         print("\t {}".format(c))
