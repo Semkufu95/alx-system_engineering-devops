@@ -13,8 +13,10 @@ global
         crt-base /etc/ssl/private
 
         # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
         ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
         ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+        ssl-dh-param-file /etc/haproxy/dhparams.pem
 
 defaults
         log     global
@@ -31,19 +33,11 @@ defaults
         errorfile 502 /etc/haproxy/errors/502.http
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
-frontend erawin-frontend
-    bind *:80
-    mode http
-    http-request redirect scheme https code 301 unless { ssl_fc }
-    http-request set-header X_Forwarded-Proto http
-    default_backend erawin-backend
 
-frontend erawin-frontend-https
-    bind *:443 ssl crt /etc/haproxy/certs/www.erawin.tech.pem
-    http-request set-header X-Forwarded-Proto https
-    default_backend erawin-backend
-
-backend erawin-backend
-    balance roundrobin
-    server 324857-web-01 18.215.160.180:80 check
-    server 324857-web-02 3.95.32.201:80 check
+listen myserver
+        bind *:80
+        bind *:443 ssl crt /etc/haproxy/ssl/www.nuux.tech.pem
+        redirect scheme https code 301 if !{ ssl_fc }
+        balance roundrobin
+        server server1 18.207.1.87:80 check
+        server server2 52.206.189.175:80 check
