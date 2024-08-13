@@ -15,7 +15,9 @@ def number_of_subscribers(subreddit):
 
     # check if subredit is valid
     if result.status_code == 200:
-        data = result.json()
-        return data['data']['subscribers']
+        data = result.json().get('data', {})
+        if not data:
+            return 0
+        return data.get('subscribers', 0)
     else:
         return 0
