@@ -5,6 +5,7 @@ A function that queries REDDIT API and returns the number of subreddits
 
 import requests
 
+
 def number_of_subscribers(subreddit):
     # set header to avoid too many requests errors
     headers = {'User-Agent': 'python:subscribers.counter:v1:0:0 (by semkufu)'}
