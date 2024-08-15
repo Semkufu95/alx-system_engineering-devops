@@ -1,0 +1,1 @@
+This directory contains a puppet code that debugs an apache2 web server error(500)
