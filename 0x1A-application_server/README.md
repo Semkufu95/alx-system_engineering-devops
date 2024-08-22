@@ -1,0 +1,1 @@
+An application server added to serve dynamic contents
