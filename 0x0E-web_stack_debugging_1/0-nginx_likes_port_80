@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sudo apt update
+sudo apt install nginx
+nginx
+ps aux | grep nginx
+rm /run/nginx.pid
